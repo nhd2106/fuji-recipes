@@ -7,12 +7,17 @@ export async function GET(req: NextRequest, query: {
     order?: string;
     cameraModel?: string;
     userId?: string;
-  }
+    filmSimulation?: string;
+  },
+  searhParams: URLSearchParams
 }) {
+  // get search params
+  const searchParams = new URLSearchParams(req.url);
   // Get query parameters
-  const take =  query?.params?.take ? parseInt(query.params.take) : 10;
-  const order = query?.params?.order || 'asc';
-  const cameraModel = query?.params?.cameraModel;
+  const take =  parseInt(searchParams.get('take') ?? "0")  || 10;
+  const order = searchParams.get('order') || 'desc';
+  const cameraModel =   searchParams.get('cameraModel') || query?.params?.cameraModel;
+  const filmSimulation = searchParams.get('filmSimulation') || query?.params?.filmSimulation;
   const userId = query?.params?.userId;
   // Validate query parameters
   if (isNaN(take) || (order !== 'asc' && order !== 'desc')) {
@@ -39,6 +44,12 @@ export async function GET(req: NextRequest, query: {
     queryObj.where = {
       ...queryObj.where,
       userId
+    }
+  }
+  if (filmSimulation) {
+    queryObj.where = {
+      ...queryObj.where,
+      filmSimulation
     }
   }
   const res = await prisma.recipe.findMany(queryObj);

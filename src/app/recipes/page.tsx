@@ -8,21 +8,33 @@ async function getRecipes({
   take = 10,
   order = "desc",
   user = "",
+  cameraModel = "",
+  filmSimulation = "",
 }: {
   take?: number;
   order?: "asc" | "desc";
   user?: string;
+  cameraModel?: string;
+  filmSimulation?: string;
 } = {}) {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/api/get-recipes?take=${take}&order=${order}&email=${user}`,
-    {
-      method: "GET",
-      headers: {
-        contentType: "application/json",
-      },
-      cache: "no-cache",
-    }
-  );
+  let url = `${process.env.NEXT_PUBLIC_URL}/api/get-recipes?take=${take}&order=${order}`;
+  if (user) {
+    url = `${url}&userId=${user}`;
+  }
+  if (cameraModel) {
+    url = `${url}&cameraModel=${cameraModel}`;
+  }
+  if (filmSimulation) {
+    url = `${url}&filmSimulation=${filmSimulation}`;
+  }
+  console.log(url);
+  const res = await fetch(url, {
+    method: "GET",
+    headers: {
+      contentType: "application/json",
+    },
+    cache: "no-cache",
+  });
 
   const data = (await res.json()) as Recipe[];
   return data;
@@ -35,8 +47,8 @@ async function Page({
   params: { slug: string };
   others: { [key: string]: string };
 }) {
-  const { user, email } = searchParams as any;
-  const recipes = await getRecipes({ user });
+  const { user, email, cameraModel, filmSimulation } = searchParams as any;
+  const recipes = await getRecipes({ user, cameraModel, filmSimulation });
 
   return (
     <MaxWidthWrapper>

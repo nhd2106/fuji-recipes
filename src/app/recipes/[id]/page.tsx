@@ -3,6 +3,7 @@ import MyImage from "@/components/MyImage";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { parsedFields, ingredients } from "@/utils";
 import { get } from "lodash";
+import Link from "next/link";
 
 import {
   Camera,
@@ -14,8 +15,8 @@ import {
   Eye,
   Filter,
   User,
+  Tag,
 } from "lucide-react";
-import Link from "next/link";
 
 const icons = {
   filmSimulation: <Film size={24} />,
@@ -98,7 +99,13 @@ const page = async ({
               </div>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{cameraModel}</div>
+              <Link
+                href={`/recipes?cameraModel=${cameraModel}`}
+                className="text-2xl font-bold text-blue-600 flex items-center"
+              >
+                {cameraModel}
+                <Tag size={24} className="ml-3" />
+              </Link>
             </CardContent>
           </Card>
           {Object.entries(others || {})
@@ -146,7 +153,17 @@ const page = async ({
                     </span>
                   </CardHeader>
                   <CardContent>
-                    <div className="text-xl font-bold">{value}</div>
+                    {key === "filmSimulation" ? (
+                      <Link
+                        href={`/recipes?filmSimulation=${value}`}
+                        className="text-xl font-bold text-blue-600 flex items-center"
+                      >
+                        {value}
+                        <Tag size={24} className="ml-3" />
+                      </Link>
+                    ) : (
+                      <div className="text-md font-bold">{value}</div>
+                    )}
                   </CardContent>
                 </Card>
               );
