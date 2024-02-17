@@ -1,0 +1,63 @@
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "mongodb"
+    url      = env("MONGODB_URL")
+}
+
+model User {
+    id        String   @id @default(auto()) @map("_id") @db.ObjectId
+    email     String   @unique
+    name      String?
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    kindeId   String
+}
+
+model Recipe {
+    id                  String   @id @default(auto()) @map("_id") @db.ObjectId
+    name                String
+    description         String?
+    cameraModel         String?
+    filmSimulation      String?
+    grainEffect         String?
+    colorChromeEffect   String?
+    colorChromeFxBlue   String?
+    monochrommaticColor String?
+    whiteBalance        String?
+    dynamicRange        String?
+    toneCurve           String?
+    color               String?
+    sharpness           String?
+    noiseReduction      String?
+    clarity             String?
+    isoLimit            String?
+    exposureComp        String?
+    mainImageId         String?
+    dRangePriority      String?
+    colorSpace          String?
+    createdAt           DateTime @default(now())
+    updatedAt           DateTime @updatedAt
+    images              String?
+    userId              String
+    mainImage           String?
+    email               String?
+}
+
+model ImageKitImage {
+    fileId       String   @id @map("_id")
+    url          String // Access URL provided by ImageKit
+    filePath     String // Path in ImageKit storage
+    thumbnailUrl String? // Optional thumbnail URL
+    title        String?
+    caption      String?
+    createdAt    DateTime @default(now())
+    name         String
+    recipeId     String?
+    fileType     String
+    height       Int
+    width        Int
+    orientation  Int
+}

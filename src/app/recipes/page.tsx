@@ -1,16 +1,20 @@
+import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import MyImage from "@/components/MyImage";
 import { Recipe } from "@/types/recipes";
+import { User } from "lucide-react";
 import Link from "next/link";
 
-const getRecipes = async ({
+async function getRecipes({
   take = 10,
   order = "desc",
+  user = "",
 }: {
   take?: number;
   order?: "asc" | "desc";
-} = {}) => {
+  user?: string;
+} = {}) {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/api/get-recipes?take=${take}&order=${order}`,
+    `${process.env.NEXT_PUBLIC_URL}/api/get-recipes?take=${take}&order=${order}&email=${user}`,
     {
       method: "GET",
       headers: {
@@ -22,20 +26,26 @@ const getRecipes = async ({
 
   const data = (await res.json()) as Recipe[];
   return data;
-};
+}
 
-export default async function Home() {
-  const recipes = await getRecipes();
+async function Page({
+  searchParams,
+}: {
+  searchParams: URLSearchParams;
+  params: { slug: string };
+  others: { [key: string]: string };
+}) {
+  const { user, email } = searchParams as any;
+  const recipes = await getRecipes({ user });
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-5 md:p-24">
-      <h1 className="max-w-4xl text-3xl font-bold md:text-4xl lg:text-5xl mb-20">
-        Create your <span className="text-blue-600">recipes </span>
-        and share it with the world.
-      </h1>
+    <MaxWidthWrapper>
+      <h1 className="text-xl md:text-2xl lg:text-3xl my-5">Đóng góp của</h1>
+      <div className="flex items-center my-5">
+        <User size={24} />
+        <span className="font-semibold">{email}</span>
+      </div>
       <div>
-        <h2 className="mb-10">
-          <span className="text-2xl font-bold">Latest Recipes</span>
-        </h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {(recipes || []).map((recipe, i) => (
             <Link
@@ -62,6 +72,8 @@ export default async function Home() {
           ))}
         </div>
       </div>
-    </main>
+    </MaxWidthWrapper>
   );
 }
+
+export default Page;
