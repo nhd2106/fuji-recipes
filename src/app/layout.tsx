@@ -12,25 +12,6 @@ import { usePathname } from "next/navigation";
 
 const inter = Inter({ subsets: ["latin"] });
 
-// export const metadata: Metadata = {
-//   title: "Fuji Recipes",
-//   description: "Fuji Recipes - Create and share your own recipes. 🍣 ",
-//   openGraph: {
-//     title: "Fuji Recipes",
-//     description: "Fuji Recipes - Create and share your own recipes. 🍣 ",
-//     type: "website",
-//     url: "https://fujirecipes.com",
-//     images: [
-//       {
-//         url: "https://fujirecipes.com/og-image.jpg",
-//         width: 1200,
-//         height: 630,
-//         alt: "Fuji Recipes",
-//       },
-//     ],
-//   },
-// };
-
 export async function generateMetadata({
   params,
   searchParams,

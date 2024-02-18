@@ -15,8 +15,8 @@ const Header = () => {
   const pathname = usePathname();
   const { user } = useKindeBrowserClient();
 
-  if (pathname === "/auth") {
-    return null;
+  if (pathname === "/login") {
+    return <div></div>;
   }
 
   return (

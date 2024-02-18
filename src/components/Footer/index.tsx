@@ -44,8 +44,8 @@ const navigation = {
 
 const Footer = () => {
   const pathname = usePathname();
-  if (pathname === "/auth") {
-    return null;
+  if (pathname === "/login") {
+    return <div></div>;
   }
   return (
     <footer className="bg-white" aria-labelledby="footer-heading">
