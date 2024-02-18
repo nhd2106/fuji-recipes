@@ -47,7 +47,7 @@ function Contribute() {
     );
 
     try {
-      const host = process.env.NEXT_PUBLIC_URL;
+      const host = process.env.NEXT_PUBLIC_SITE_URL;
       const url = `${host}/api/create-recipe`;
       const res = await fetch(url, {
         method: "POST",

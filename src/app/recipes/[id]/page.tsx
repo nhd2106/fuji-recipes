@@ -30,7 +30,7 @@ const icons = {
 };
 
 const getRecipe = async (id: string) => {
-  const host = process.env.NEXT_PUBLIC_URL;
+  const host = process.env.NEXT_PUBLIC_SITE_URL;
   const response = await fetch(`${host}/api/recipes/${id}`, {
     method: "GET",
     headers: {

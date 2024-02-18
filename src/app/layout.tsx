@@ -16,7 +16,7 @@ export async function generateMetadata({
   params,
   searchParams,
 }: Props): Promise<Metadata> {
-  const host = process.env.NEXT_PUBLIC_URL;
+  const host = process.env.NEXT_PUBLIC_SITE_URL;
   return {
     title: "Fuji Recipes",
     description: "Fuji Recipes - Create and share your own recipes. 🍣 ",

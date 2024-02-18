@@ -18,7 +18,7 @@ async function getRecipes({
   cameraModel?: string;
   filmSimulation?: string;
 } = {}) {
-  let url = `${process.env.NEXT_PUBLIC_URL}/api/get-recipes?take=${take}&order=${order}`;
+  let url = `${process.env.NEXT_PUBLIC_SITE_URL}/api/get-recipes?take=${take}&order=${order}`;
   if (user) {
     url = `${url}&userId=${user}`;
   }

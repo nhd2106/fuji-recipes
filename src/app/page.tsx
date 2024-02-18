@@ -12,7 +12,7 @@ const getRecipes = async ({
   order?: "asc" | "desc";
 } = {}): Promise<Recipe[]> => {
   const url = `${
-    process.env.NEXT_PUBLIC_URL || "http://localhost:3000"
+    process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"
   }/api/get-recipes?take=${take}&order=${order}`;
   const res = await fetch(url, {
     method: "GET",
