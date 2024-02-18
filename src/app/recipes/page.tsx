@@ -3,6 +3,7 @@ import MyImage from "@/components/MyImage";
 import { Recipe } from "@/types/recipes";
 import { User } from "lucide-react";
 import Link from "next/link";
+export const dynamic = "force-dynamic";
 
 async function getRecipes({
   take = 10,
@@ -27,7 +28,6 @@ async function getRecipes({
   if (filmSimulation) {
     url = `${url}&filmSimulation=${filmSimulation}`;
   }
-  console.log(url);
   const res = await fetch(url, {
     method: "GET",
     headers: {

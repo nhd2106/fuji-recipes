@@ -5,7 +5,7 @@ import { buttonVariants } from "@/components/ui/button";
 import { LoginLink, RegisterLink } from "@kinde-oss/kinde-auth-nextjs";
 import Image from "next/image";
 
-export default function Auth() {
+export default function Login() {
   return (
     <MaxWidthWrapper>
       <div className="h-screen grid grid-cols-2 justify-center items-center">
