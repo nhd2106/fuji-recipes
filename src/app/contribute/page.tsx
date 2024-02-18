@@ -1,6 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
+export const dynamic = "force-dynamic";
+
 import { set } from "lodash";
 import { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
