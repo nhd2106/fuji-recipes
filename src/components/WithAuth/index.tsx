@@ -1,3 +1,5 @@
+"use client";
+
 import { redirect } from "next/navigation";
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 
