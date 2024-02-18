@@ -45,7 +45,6 @@ async function Page({
 }: {
   searchParams: URLSearchParams;
   params: { slug: string };
-  others: { [key: string]: string };
 }) {
   const { user, email, cameraModel, filmSimulation } = searchParams as any;
   const recipes = await getRecipes({ user, cameraModel, filmSimulation });

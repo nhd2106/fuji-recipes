@@ -2,30 +2,33 @@ import MyImage from "@/components/MyImage";
 import { Recipe } from "@/types/recipes";
 import Link from "next/link";
 
+export const dynamic = "force-dynamic";
+
 const getRecipes = async ({
   take = 10,
   order = "desc",
 }: {
   take?: number;
   order?: "asc" | "desc";
-} = {}) => {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/api/get-recipes?take=${take}&order=${order}`,
-    {
-      method: "GET",
-      headers: {
-        contentType: "application/json",
-      },
-      cache: "no-cache",
-    }
-  );
+} = {}): Promise<Recipe[]> => {
+  const url = `${
+    process.env.NEXT_PUBLIC_URL || "http://localhost:3000"
+  }/api/get-recipes?take=${take}&order=${order}`;
+  const res = await fetch(url, {
+    method: "GET",
+    headers: {
+      contentType: "application/json",
+    },
+    cache: "no-cache",
+  });
 
-  const data = (await res.json()) as Recipe[];
+  const data = await res.json();
   return data;
 };
 
-export default async function Home() {
+async function Home() {
   const recipes = await getRecipes();
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-5 md:p-24">
       <h1 className="max-w-4xl text-3xl font-bold md:text-4xl lg:text-5xl mb-20">
@@ -37,7 +40,7 @@ export default async function Home() {
           <span className="text-2xl font-bold">Latest Recipes</span>
         </h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {(recipes || []).map((recipe, i) => (
+          {(recipes || []).map((recipe) => (
             <Link
               className="grid gap-4 relative"
               href={`/recipes/${recipe.id}`}
@@ -65,3 +68,5 @@ export default async function Home() {
     </main>
   );
 }
+
+export default Home;

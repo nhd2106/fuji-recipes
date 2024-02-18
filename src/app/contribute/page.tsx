@@ -50,7 +50,7 @@ function Contribute() {
         body: formData,
       });
       const data = await res.json();
-      redirect(`/recipes/${data.id}`);
+      return redirect(`/recipes/${data.id}`);
     } catch (error) {
       console.log(error);
       setHandling(false);
