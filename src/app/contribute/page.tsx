@@ -14,6 +14,7 @@ import Recipes from "@/modules/recipes/Recipes";
 import WithAuth from "@/components/WithAuth";
 import { Button } from "@/components/ui/button";
 import { redirect } from "next/navigation";
+import clsx from "clsx";
 
 function Contribute() {
   const { user } = useKindeBrowserClient();
@@ -62,10 +63,18 @@ function Contribute() {
   };
 
   return (
-    <div className="p-5">
+    <div className="p-5 relative">
       <h1 className="text-3xl mb-5 text-blue-600">Tạo Film Simulation</h1>
       <Button
-        className={handling ? "bg-gray-400 cursor-not-allowed" : "bg-blue-600"}
+        className={clsx(
+          "bg-blue-600 text-white",
+          "hover:bg-blue-700",
+          "focus:ring-2 focus:ring-blue-600",
+          handling && "cursor-not-allowed",
+          handling && "opacity-50",
+          "transition-all duration-200",
+          "fixed  right-5 bottom-5 "
+        )}
         onClick={handleUpload}
         handling={handling}
       >
@@ -102,7 +111,7 @@ function Contribute() {
       {images.length > 0 && (
         <div>
           <h2>Preview</h2>
-          <div className="grid grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             {images.map((file, index) => (
               <div key={index} className="relative grid gap-4">
                 <img
