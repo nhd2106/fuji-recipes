@@ -14,8 +14,8 @@ const Recipes = ({
   return ingredients.map((ingredient, index) => {
     const { key, name, child, type, options } = ingredient;
     return (
-      <div key={index} className="mb-4">
-        <label htmlFor={key} className="block text-lg mb-2">
+      <div key={index} className="mb-4 grid gap-1">
+        <label htmlFor={key} className="block text-sm md:text-lg mb-2">
           {name}
         </label>
         {child ? (
@@ -23,7 +23,10 @@ const Recipes = ({
             const { name } = child;
             return (
               <div key={index} className="mb-2">
-                <label htmlFor={child.key} className="block text-sm mb-1">
+                <label
+                  htmlFor={child.key}
+                  className="block text-sm md:text-sm  mb-1"
+                >
                   {name}
                 </label>
                 <InputComponent

@@ -66,7 +66,9 @@ const page = async ({
 
   return (
     <MaxWidthWrapper>
-      <h1 className="text-xl md:text-2xl lg:text-4 xl my-6">{name}</h1>
+      <h1 className="text-2xl md:text-2xl lg:text-4 xl my-6 font-semibold">
+        {name}
+      </h1>
       <p>{description}</p>
       <div className="my-8">
         <div className="my-3">
@@ -90,10 +92,10 @@ const page = async ({
         </div>
       </div>
       <div>
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-4 grid-cols-2 md:grid-cols-2 lg:grid-cols-4">
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Camera</CardTitle>
+              <CardTitle className="text-sm font-medium text">Camera</CardTitle>
               <div className="h-4 w-4 text-muted-foreground">
                 {get(icons, "cameraModel", "")}
               </div>
@@ -101,7 +103,7 @@ const page = async ({
             <CardContent>
               <Link
                 href={`/recipes?cameraModel=${cameraModel}`}
-                className="text-2xl font-bold text-blue-600 flex items-center"
+                className="text-lg md:text-xl font-bold text-blue-600 flex items-center"
               >
                 {cameraModel}
                 <Tag size={24} className="ml-3" />
@@ -119,7 +121,7 @@ const page = async ({
                 return (
                   <Card key={key}>
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                      <CardTitle className="text-sm font-medium">
+                      <CardTitle className="text-sm font-medium ">
                         {name || key}
                       </CardTitle>
                       <span className="h-4 w-4 text-muted-foreground">
@@ -156,7 +158,7 @@ const page = async ({
                     {key === "filmSimulation" ? (
                       <Link
                         href={`/recipes?filmSimulation=${value}`}
-                        className="text-xl font-bold text-blue-600 flex items-center"
+                        className="text-lg md:text-xl font-bold text-blue-600 flex items-center"
                       >
                         {value}
                         <Tag size={24} className="ml-3" />
@@ -171,7 +173,7 @@ const page = async ({
         </div>
       </div>
       <div>
-        <h2 className="mb-5">
+        <h2 className="my-5">
           <span className="text-2xl font-bold">Hình tham khảo</span>
         </h2>
         <div className="flex justify-center flex-col gap-1 md:gap-4 items-center">

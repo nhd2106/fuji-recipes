@@ -1,5 +1,6 @@
 import MyImage from "@/components/MyImage";
 import { Recipe } from "@/types/recipes";
+import Image from "next/image";
 import Link from "next/link";
 
 export const dynamic = "force-dynamic";

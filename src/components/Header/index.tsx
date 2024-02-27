@@ -2,13 +2,22 @@
 
 import Link from "next/link";
 import MaxWidthWrapper from "../MaxWidthWrapper";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import {
   LoginLink,
   LogoutLink,
   useKindeBrowserClient,
 } from "@kinde-oss/kinde-auth-nextjs";
-import { Plus, Menu } from "lucide-react";
+import {
+  Plus,
+  Menu,
+  Home,
+  User,
+  LogIn,
+  PlusSquare,
+  LogOut,
+  XIcon,
+} from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useRef, useState } from "react";
 import { useOnClickOutside } from "usehooks-ts";
@@ -47,7 +56,11 @@ const Header = () => {
             className="block sm:hidden p-2"
             aria-label="Menu"
           >
-            <Menu className="h-6 w-6" />
+            {isOpen ? (
+              <XIcon className="h-6 w-6" />
+            ) : (
+              <Menu className="h-6 w-6" />
+            )}
           </button>
           <div className="hidden items-center space-x-4 sm:flex">
             <>
@@ -115,36 +128,51 @@ const Header = () => {
         )}
       >
         {/* Sidebar content goes here */}
-        <div className="p-4 grid grid-rows-1 grid-cols-1 justify-start">
-          <h1 className="text-xl">
-            <Link href="/">Fuji-Mates.</Link>
+        <div className="p-4 grid grid-rows-1 grid-cols-1 justify-start bg-white">
+          <h1 className="text-2xl mb-10">
+            <Link href="/">
+              <div className="flex items-center">
+                <Home className="mr-2" /> {/* Home icon */}
+                Fuji-Mates.
+              </div>
+            </Link>
           </h1>
           <div className="mt-10">
             {user ? (
-              <div className="flex flex-col ">
-                <Link
-                  className="text-lg"
-                  href="/contribute"
+              <div className="flex flex-col space-y-4">
+                <Link href="/contribute" onClick={toggleMenu}>
+                  <div className="flex items-center text-lg">
+                    <PlusSquare className="mr-2" /> {/* Plus icon */}
+                    Tạo Recipe
+                  </div>
+                </Link>
+                <Link onClick={toggleMenu} href="/profile">
+                  <div className="flex items-center text-lg">
+                    <User className="mr-2" /> {/* User icon */}
+                    Tài khoản
+                  </div>
+                </Link>
+                <LogoutLink
                   onClick={toggleMenu}
+                  className="text-lg absolute bottom-10"
                 >
-                  Tạo Recipe
-                </Link>
-                <Link onClick={toggleMenu} className="text-lg" href="/profile">
-                  Tài khoản
-                </Link>
-                <LogoutLink onClick={toggleMenu} className="text-lg">
-                  <button>Đăng xuất</button>
+                  <div className="flex items-center">
+                    <LogOut className="mr-2" /> {/* Sign out icon */}
+                    Đăng xuất
+                  </div>
                 </LogoutLink>
               </div>
             ) : (
               <div>
                 <LoginLink onClick={toggleMenu} className="text-lg">
-                  <button>Đăng nhập</button>
+                  <div className="flex items-center">
+                    <LogIn className="mr-2" /> {/* Sign in icon */}
+                    Đăng nhập
+                  </div>
                 </LoginLink>
               </div>
             )}
           </div>
-          {/* Additional sidebar links */}
         </div>
       </div>
     </nav>

@@ -88,7 +88,7 @@ function Contribute() {
           onChange={(e) => setRecipe({ ...recipe, name: e.target.value })} // eslint-disable-line
         />
       </div>
-      <div className="grid md:grid-cols-5 gap-8">
+      <div className="grid md:grid-cols-5 gap-2 md:gap-8 grid-cols-2">
         <Recipes
           onChange={(path: string, val: any) => {
             const newRecipe = { ...recipe };
