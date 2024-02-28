@@ -80,8 +80,8 @@ const page = async ({
             day: "numeric",
           })}
         </div>
-        <div className="flex items-center ">
-          <User size={24} />
+        <div className="flex items-baseline ">
+          <User size={24} className="mr-2" />
           <Link
             href={`
           /recipes?user=${userId}&email=${email}
@@ -185,7 +185,7 @@ const page = async ({
                   className={cn(
                     "grid gap-3 md:gap-4 items-center justify-center rounded-md",
                     image.orientation === 1
-                      ? "md:bg-black/50 sm:p-32 sm:px-1 sm:border-white sm:border-2 sm:border-solid bg-transparent "
+                      ? "md:bg-gray-500 sm:p-32 sm:px-1 sm:border-white sm:border-2 sm:border-solid bg-transparent "
                       : ""
                   )}
                   key={image.fileId}

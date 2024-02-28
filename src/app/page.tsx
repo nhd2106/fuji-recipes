@@ -40,7 +40,7 @@ async function Home() {
         <h2 className="mb-10">
           <span className="text-2xl font-bold">Latest Recipes</span>
         </h2>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {(recipes || []).map((recipe) => (
             <Link
               className="grid gap-4 relative"

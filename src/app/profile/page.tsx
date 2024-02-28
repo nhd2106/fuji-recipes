@@ -58,31 +58,33 @@ function Page() {
                 {isFetching ? (
                   <div>Loading...</div>
                 ) : (
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                  <div className="">
                     {(recipes || []).length ? (
-                      (recipes || []).map((recipe: Recipe) => (
-                        <Link
-                          className="grid gap-4 relative"
-                          href={`/recipes/${recipe.id}`}
-                          key={recipe.id}
-                        >
-                          <MyImage
-                            src={recipe.mainImage}
-                            alt={recipe.name}
-                            width={400}
-                            height={400}
-                            className="rounded-lg h-auto w-full object-cover"
-                          />
-                          <div className="absolute top-2 right-2 md:top-5 md:right-5 text-yellow-400 bg-black bg-opacity-50 p-1 md:p-4 rounded-md">
-                            <h3 className="text-xs md:first-line:text-lg font-bold">
-                              {recipe.name}
-                            </h3>
-                            <p className="text-xs md:text-sm">
-                              Camera: {recipe.cameraModel}
-                            </p>
-                          </div>
-                        </Link>
-                      ))
+                      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                        {(recipes || []).map((recipe: any) => (
+                          <Link
+                            className="grid gap-4 relative"
+                            href={`/recipes/${recipe.id}`}
+                            key={recipe.id}
+                          >
+                            <MyImage
+                              src={recipe.mainImage}
+                              alt={recipe.name}
+                              width={400}
+                              height={400}
+                              className="rounded-lg h-auto w-full object-cover"
+                            />
+                            <div className="absolute top-2 right-2 md:top-5 md:right-5 text-yellow-400 bg-black bg-opacity-50 p-1 md:p-4 rounded-md">
+                              <h3 className="text-xs md:first-line:text-lg font-bold">
+                                {recipe.name}
+                              </h3>
+                              <p className="text-xs md:text-sm">
+                                Camera: {recipe.cameraModel}
+                              </p>
+                            </div>
+                          </Link>
+                        ))}
+                      </div>
                     ) : (
                       <div>
                         <h3 className="text-xl font-bold">

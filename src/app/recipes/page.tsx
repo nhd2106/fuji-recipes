@@ -52,13 +52,13 @@ async function Page({
   return (
     <MaxWidthWrapper>
       <h1 className="text-xl md:text-2xl lg:text-3xl my-5">Đóng góp của</h1>
-      <div className="flex items-center my-5">
-        <User size={24} />
+      <div className="flex items-baseline my-5">
+        <User size={24} className="mr-2" />
         <span className="font-semibold">{email}</span>
       </div>
       <div>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {(recipes || []).map((recipe, i) => (
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          {(recipes || []).map((recipe) => (
             <Link
               className="grid gap-4 relative"
               href={`/recipes/${recipe.id}`}
