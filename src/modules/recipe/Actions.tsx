@@ -15,6 +15,7 @@ const Action = ({
   const { user } = useKindeBrowserClient();
   const [like, setLike] = useState(likes);
   const handleLike = async () => {
+    if (!user) return;
     const host = process.env.NEXT_PUBLIC_SITE_URL;
     const url = `${host}/api/action`;
     await fetch(url, {
