@@ -18,7 +18,7 @@ import {
   Tag,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-
+import Actions from "@/modules/recipe/Actions";
 const icons = {
   filmSimulation: <Film size={24} />,
   cameraModel: <Camera size={24} />,
@@ -62,14 +62,17 @@ const page = async ({
     userId,
     mainImage,
     email,
+    likes,
     ...others
   } = res;
 
   return (
     <MaxWidthWrapper>
-      <h1 className="text-2xl md:text-2xl lg:text-4 xl my-6 font-semibold">
-        {name}
-      </h1>
+      <div className="">
+        <h1 className="text-2xl md:text-2xl lg:text-4 xl my-6 font-semibold">
+          {name}
+        </h1>
+      </div>
       <p>{description}</p>
       <div className="my-8">
         <div className="my-3">
@@ -80,6 +83,7 @@ const page = async ({
             day: "numeric",
           })}
         </div>
+        <Actions recipeId={id} likes={likes} />
         <div className="flex items-baseline ">
           <User size={24} className="mr-2" />
           <Link
