@@ -2,7 +2,7 @@ import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import MyImage from "@/components/MyImage";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { parsedFields, ingredients } from "@/utils";
-import { get } from "lodash";
+import _, { get } from "lodash";
 import Link from "next/link";
 
 import {
@@ -17,6 +17,7 @@ import {
   User,
   Tag,
 } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 const icons = {
   filmSimulation: <Film size={24} />,
@@ -92,7 +93,7 @@ const page = async ({
         </div>
       </div>
       <div>
-        <div className="grid gap-4 grid-cols-2 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-1 md:gap-4 grid-cols-2 md:grid-cols-2 lg:grid-cols-4">
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium text">Camera</CardTitle>
@@ -176,19 +177,30 @@ const page = async ({
         <h2 className="my-5">
           <span className="text-2xl font-bold">Hình tham khảo</span>
         </h2>
-        <div className="flex justify-center flex-col gap-1 md:gap-4 items-center">
-          {images.map((image: any) => {
-            return (
-              <MyImage
-                key={image.fileId}
-                src={image.url}
-                alt={image.name}
-                width={400}
-                height={400}
-                className="grid gap-1 md:gap-4 relative rounded-md h-auto w-9/10 md:p-0 md:w-3/5  object-cover"
-              />
-            );
-          })}
+        <div className="">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {_.orderBy(images, "orientation", "desc").map((image: any) => {
+              return (
+                <div
+                  className={cn(
+                    "grid gap-3 md:gap-4 items-center justify-center rounded-md",
+                    image.orientation === 1
+                      ? "md:bg-black/50 sm:p-32 sm:px-1 sm:border-white sm:border-2 sm:border-solid bg-transparent "
+                      : ""
+                  )}
+                  key={image.fileId}
+                >
+                  <MyImage
+                    src={image.url}
+                    alt={image.name}
+                    width={400}
+                    height={400}
+                    className=" relative rounded-md object-cover"
+                  />
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
     </MaxWidthWrapper>

@@ -1,7 +1,7 @@
 "use client";
 
 import { imageKitLoader } from "@/lib/utils";
-import Image from "next/image";
+import Image, { ImageProps } from "next/image";
 
 const MyImage = ({
   alt,
@@ -16,7 +16,7 @@ const MyImage = ({
   width: number;
   height: number;
   className?: string;
-}) => {
+} & ImageProps) => {
   return (
     <Image
       loader={imageKitLoader}
@@ -25,7 +25,6 @@ const MyImage = ({
       width={width}
       height={height}
       className={className}
-      blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/w8AAwAB/9g9ZAAAAABJRU5ErkJggg=="
       {...props}
     />
   );

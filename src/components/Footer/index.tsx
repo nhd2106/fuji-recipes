@@ -19,7 +19,8 @@ const navigation = {
     },
     {
       name: "Instagram",
-      href: "#",
+      href: "https://www.instagram.com/imadevlovefilm/",
+      target: "_blank",
       icon: (props: any) => (
         <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
           <path
@@ -90,6 +91,7 @@ const Footer = () => {
                 key={item.name}
                 href={item.href}
                 className="text-gray-400 hover:text-gray-500"
+                target={item.target ?? ""}
               >
                 <span className="sr-only">{item.name}</span>
                 <item.icon className="h-6 w-6" aria-hidden="true" />

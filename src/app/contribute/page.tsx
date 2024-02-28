@@ -3,7 +3,7 @@
 
 export const dynamic = "force-dynamic";
 
-import { set } from "lodash";
+import { cloneDeep, set } from "lodash";
 import { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
@@ -24,6 +24,7 @@ function Contribute() {
   const onDrop = useCallback((acceptedFiles: any) => {
     setImages(acceptedFiles);
   }, []);
+  console.log(images);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
@@ -119,6 +120,26 @@ function Contribute() {
                   src={URL.createObjectURL(file)}
                   alt=""
                   className="w-full h-auto object-cover rounded-md"
+                />
+                <Input
+                  type="text"
+                  value={recipe.images?.[index]?.name}
+                  onBlur={(e) => {
+                    const imageClone = images[index];
+                    const blob = imageClone.slice(
+                      0,
+                      imageClone.size,
+                      "image/jpeg"
+                    );
+                    const newImage = new File([blob], e.target.value, {
+                      type: imageClone.type,
+                    });
+                    const newImages = cloneDeep(images);
+                    newImages[index] = newImage;
+                    setImages(newImages);
+                  }}
+                  placeholder="Tên ảnh"
+                  className="w-full"
                 />
 
                 <Button
