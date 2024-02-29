@@ -41,9 +41,6 @@ const InputComponent = ({
   disabled?: boolean;
 }) => {
   const [open, setOpen] = useState(false);
-  if (type === "comboBox") {
-    console.log(value);
-  }
   switch (type) {
     case "select":
       return (

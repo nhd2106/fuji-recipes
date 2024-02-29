@@ -2,7 +2,7 @@ export const ingredients = [
     {
         key: "cameraModel",
         name: "Camera Model",
-        type: "comboBox",
+        type: "select",
         default: "X-T3",
         options: [
             "XT-1",
@@ -40,14 +40,9 @@ export const ingredients = [
             "X-100",
             "X-100S",
             "X-100T",
+            "X-100F",   
             "X-100V",
-            "X-100F",
-            "X-70",
-            "X-30",
-            "X-20",
-            "X-10",
-            "X-M1",
-            "X-M2",            
+            "X-100VI",
         ],
     }
     ,

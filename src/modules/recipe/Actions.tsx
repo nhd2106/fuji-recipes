@@ -29,7 +29,7 @@ const Action = ({
     <div className="flex space-x-1 my-2">
       <Button size="icon" variant="link">
         <LucideHeart size={24} className="text-red-500" onClick={handleLike} />
-        <span className="ml-2">{likes}</span>
+        <span className="ml-2">{like}</span>
       </Button>
       <Button variant="link" size="icon">
         <Share2

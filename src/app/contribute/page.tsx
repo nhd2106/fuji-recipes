@@ -24,7 +24,6 @@ function Contribute() {
   const onDrop = useCallback((acceptedFiles: any) => {
     setImages(acceptedFiles);
   }, []);
-  console.log(images);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,

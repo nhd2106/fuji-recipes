@@ -3,8 +3,6 @@ import { NextRequest } from 'next/server';
 
 export async function POST(req: NextRequest) {
     const body =  await req.json() as any;
-    const type = body.type;
-    let data = {};
     const isLike = await prisma.like.findFirst({
         where: {
             userId: body.userId,

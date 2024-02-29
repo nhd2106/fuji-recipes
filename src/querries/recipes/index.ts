@@ -1,6 +1,6 @@
 import {useQuery } from '@tanstack/react-query'
 
-export default function useRecipes(userId: string) {
+export  function useRecipes(userId: string) {
   return useQuery({
     queryKey: ['recipes'],
     queryFn: async () => {
@@ -8,5 +8,16 @@ export default function useRecipes(userId: string) {
       return response.json()
     }, 
     enabled: !!userId
+  })
+}
+
+export function useSavedRecipes(userId?: string) {
+  return useQuery({
+    queryKey: ['saved-recipes'],
+    queryFn: async () => {
+      const response = await fetch(`/api/get-saved-recipes?userId=${userId}`)
+      return response.json()
+    },
+    enabled: Boolean(userId)
   })
 }
