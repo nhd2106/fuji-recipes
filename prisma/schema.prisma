@@ -64,7 +64,7 @@ model ImageKitImage {
     fileType     String
     height       Int
     width        Int
-    orientation  Int
+    orientation  Int?
 }
 
 model Like {

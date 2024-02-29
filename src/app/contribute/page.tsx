@@ -8,21 +8,46 @@ import { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import { XIcon } from "lucide-react";
+import Compressor from "compressorjs";
 
 import { Input } from "@/components/ui/input";
 import Recipes from "@/modules/recipes/Recipes";
 import WithAuth from "@/components/WithAuth";
 import { Button } from "@/components/ui/button";
-import { redirect } from "next/navigation";
 import clsx from "clsx";
+import { useRouter } from "next/navigation";
+import { cn } from "@/lib/utils";
 
 function Contribute() {
   const { user } = useKindeBrowserClient();
   const [images, setImages] = useState<any[]>([]);
   const [recipe, setRecipe] = useState<any>({});
   const [handling, setHandling] = useState(false);
+  const [uploading, setUploading] = useState(false);
+  const router = useRouter();
   const onDrop = useCallback((acceptedFiles: any) => {
-    setImages(acceptedFiles);
+    setUploading(true);
+    const newImages = [] as any[];
+    const commpressedImages = acceptedFiles.map(
+      (file: any) =>
+        new Promise((resolve, reject) => {
+          new Compressor(file, {
+            quality: 0.5,
+            success(result) {
+              newImages.push(result);
+              resolve(result);
+            },
+            error(err) {
+              console.log(err.message);
+              reject(err);
+            },
+          });
+        })
+    );
+    Promise.all(commpressedImages).then(() => {
+      setImages(newImages as any);
+      setUploading(false);
+    });
   }, []);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
@@ -35,19 +60,21 @@ function Contribute() {
   const handleUpload = async () => {
     setHandling(true);
     const formData = new FormData();
+
     images.forEach((image) => {
       formData.append("files", image);
     });
-    formData.append(
-      "recipe",
-      JSON.stringify({
-        ...recipe,
-        userId: user?.id,
-        email: user?.email,
-      })
-    );
 
     try {
+      formData.append(
+        "recipe",
+        JSON.stringify({
+          ...recipe,
+          userId: user?.id,
+          email: user?.email,
+        })
+      );
+
       const host = process.env.NEXT_PUBLIC_SITE_URL;
       const url = `${host}/api/create-recipe`;
       const res = await fetch(url, {
@@ -55,7 +82,9 @@ function Contribute() {
         body: formData,
       });
       const data = await res.json();
-      return redirect(`/recipes/${data.id}`);
+      if (data?.id) {
+        router.push(`/recipes/${data.id}`);
+      }
     } catch (error) {
       console.log(error);
       setHandling(false);
@@ -101,11 +130,46 @@ function Contribute() {
       </div>
       <h2>Sample Images</h2>
       <div {...getRootProps()} className="border-2 border-dashed p-4">
-        <input {...getInputProps()} />
+        <input
+          {...getInputProps()}
+          className={cn(
+            "w-full h-full",
+            "cursor-pointer",
+            "opacity-0",
+            "absolute",
+            "top-0",
+            "left-0"
+          )}
+        />
         {isDragActive ? (
           <p>Drop the files here ...</p>
         ) : (
           <p>Drag & drop some files here, or click to select files</p>
+        )}
+        {uploading && (
+          <p className="text-blue-600">
+            <svg
+              className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <circle
+                className="opacity-25"
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                strokeWidth="4"
+              ></circle>
+              <path
+                className="opacity-75"
+                fill="currentColor"
+                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+              ></path>
+            </svg>
+            Đang tải lên...
+          </p>
         )}
       </div>
       {images.length > 0 && (

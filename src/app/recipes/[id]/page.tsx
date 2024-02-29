@@ -65,7 +65,7 @@ const page = async ({
     likes,
     ...others
   } = res;
-
+  console.log(images);
   return (
     <MaxWidthWrapper>
       <div className="">
