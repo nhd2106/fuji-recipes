@@ -4,7 +4,7 @@ import MyImage from "../MyImage";
 
 function RecipesList({ recipes }: { recipes: Recipe[] }) {
   return (
-    <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-blue-400 to-blue-900">
+    <div className="w-full overflow-hidden relative h-full rounded-2xl p-5 md:p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-blue-400 to-blue-900">
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {(recipes || []).map((recipe: any) => (
           <Link

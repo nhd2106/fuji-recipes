@@ -9,31 +9,9 @@ import { useRecipes } from "@/querries/recipes";
 import SavedRecipes from "@/modules/profile/SavedRecipes";
 import RecipesList from "@/components/RecipesList";
 
-function Recipes() {
-  const { user } = useKindeBrowserClient();
-  const { data: recipes, isFetching } = useRecipes(user?.id ?? "");
-  return (
-    <div>
-      {isFetching ? (
-        <div>Loading...</div>
-      ) : (
-        <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-blue-400 to-blue-900">
-          {(recipes || []).length ? (
-            <RecipesList recipes={recipes} />
-          ) : (
-            <div>
-              <h3 className="text-xl font-bold">Bạn chưa có giả lập nào 🤔</h3>
-            </div>
-          )}
-        </div>
-      )}
-    </div>
-  );
-}
-
 function Page() {
   const { user, isLoading } = useKindeBrowserClient();
-
+  const { data: recipes, isFetching } = useRecipes(user?.id ?? "");
   return (
     <MaxWidthWrapper>
       {isLoading ? (
@@ -74,7 +52,7 @@ function Page() {
                 <h2 className="text-xl md:text-2xl lg:text-3xl font-bold my-5">
                   Các giả lập film của bạn 📸
                 </h2>
-                <Recipes />
+                <RecipesList recipes={recipes} />
 
                 <SavedRecipes />
               </div>
