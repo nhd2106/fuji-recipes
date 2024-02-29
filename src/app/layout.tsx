@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Providers from "@/app/providers";
+import { Analytics } from "@vercel/analytics/react";
 
 type Props = {
   params: { id: string };
@@ -45,6 +46,7 @@ export default function RootLayout({
           {children}
           <Footer />
         </Providers>
+        <Analytics />
       </body>
     </html>
   );
