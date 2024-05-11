@@ -25,11 +25,11 @@ import clsx from "clsx";
 
 const Header = () => {
   const pathname = usePathname();
-  const { user } = useKindeBrowserClient();
+  const { user } = useKindeBrowserClient() || {};
   const [isOpen, setIsOpen] = useState(false);
   const ref = useRef(null);
 
-  if (pathname === "/login") {
+  if (["/login", "/register"].includes(pathname)) {
     return <div></div>;
   }
 
@@ -48,7 +48,7 @@ const Header = () => {
       <MaxWidthWrapper>
         <div className="flex h-14 items-center justify-between border-b border-zinc-200">
           <Link href="/" className="flex z-40  font-semibold ">
-            <span>Fuji-Mates.</span>
+            <span>Fuji-X-Recipe</span>
           </Link>
           {/* todo add mobile nav */}
           <button
@@ -133,7 +133,7 @@ const Header = () => {
             <Link href="/">
               <div className="flex items-center">
                 <Home className="mr-2" /> {/* Home icon */}
-                Fuji-Mates.
+                Fuji-X-Recipes
               </div>
             </Link>
           </h1>

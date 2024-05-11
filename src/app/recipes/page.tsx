@@ -11,12 +11,15 @@ async function getRecipes({
   user = "",
   cameraModel = "",
   filmSimulation = "",
+  category = "",
+  ...other
 }: {
   take?: number;
   order?: "asc" | "desc";
   user?: string;
   cameraModel?: string;
   filmSimulation?: string;
+  category?: string;
 } = {}) {
   let url = `${process.env.NEXT_PUBLIC_SITE_URL}/api/get-recipes?take=${take}&order=${order}`;
   if (user) {
@@ -27,6 +30,9 @@ async function getRecipes({
   }
   if (filmSimulation) {
     url = `${url}&filmSimulation=${filmSimulation}`;
+  }
+  if (category) {
+    url = `${url}&category=${category}`;
   }
   const res = await fetch(url, {
     method: "GET",
@@ -46,16 +52,30 @@ async function Page({
   searchParams: URLSearchParams;
   params: { slug: string };
 }) {
-  const { user, email, cameraModel, filmSimulation } = searchParams as any;
-  const recipes = await getRecipes({ user, cameraModel, filmSimulation });
+  const { user, email, cameraModel, filmSimulation, category } =
+    searchParams as any;
+  const recipes = await getRecipes({
+    user,
+    cameraModel,
+    filmSimulation,
+    category,
+  });
 
   return (
     <MaxWidthWrapper>
-      <h1 className="text-xl md:text-2xl lg:text-3xl my-5">Đóng góp của</h1>
-      <div className="flex items-baseline my-5">
-        <User size={24} className="mr-2" />
-        <span className="font-semibold">{email}</span>
-      </div>
+      {user ? (
+        <div>
+          <h1 className="text-xl md:text-2xl lg:text-3xl my-5">Đóng góp của</h1>
+          <div className="flex items-baseline my-5">
+            <User size={24} className="mr-2" />
+            <span className="font-semibold">{email}</span>
+          </div>
+        </div>
+      ) : (
+        <h1 className="text-xl md:text-2xl lg:text-3xl my-5">
+          Danh sách các recipe
+        </h1>
+      )}
       <div>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {(recipes || []).map((recipe) => (
