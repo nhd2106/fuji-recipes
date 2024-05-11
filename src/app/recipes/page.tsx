@@ -34,6 +34,7 @@ async function getRecipes({
   if (category) {
     url = `${url}&category=${category}`;
   }
+
   const res = await fetch(url, {
     method: "GET",
     headers: {

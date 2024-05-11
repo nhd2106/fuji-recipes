@@ -2,12 +2,13 @@
 
 import { redirect } from "next/navigation";
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
+import Loading from "../Loading";
 
 export default function WithAuth(Conponent: any) {
   return function WithAuth(props: any) {
     const { isAuthenticated, isLoading } = useKindeBrowserClient();
     if (isLoading) {
-      return <div>Loading...</div>;
+      return <Loading />;
     }
     if (!isAuthenticated) {
       redirect("/login");

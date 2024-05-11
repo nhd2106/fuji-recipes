@@ -17,7 +17,11 @@ function SavedRecipes() {
         Các giả lập film đã lưu 📸
       </h2>
       <div>
-        <RecipesList recipes={recipes} />
+        {recipes.length > 0 ? (
+          <RecipesList recipes={recipes} />
+        ) : (
+          <p>Bạn chưa lưu giả lập nào</p>
+        )}
       </div>
     </div>
   ) : null;

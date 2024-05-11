@@ -32,7 +32,7 @@ async function Home() {
   const recipes = await getRecipes();
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-5 md:p-24">
+    <main className="flex min-h-screen flex-col items-center justify-between max-w-7xl mx-auto w-full my-5 md:p-24 p-5">
       <h1 className="max-w-4xl text-3xl font-bold md:text-4xl lg:text-5xl mb-20">
         Create your <span className="text-blue-600">recipes </span>
         and share it with the world.

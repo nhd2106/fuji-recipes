@@ -4,6 +4,7 @@ export async function GET(req: any, query: any) {
    try {
     let images = [] as any;
     const id = query.params.id;
+    
     const res = await prisma.recipe.findUnique({
         where: {
             id: id

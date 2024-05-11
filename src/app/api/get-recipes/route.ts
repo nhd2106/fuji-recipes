@@ -1,13 +1,14 @@
 import type { NextRequest } from 'next/server';
 import prisma from '@/lib/prisma'
 
-export async function GET(req: NextRequest): Promise<any> {
-  const searchParams = new URLSearchParams(req.url);
+export async function GET(req: NextRequest, context: any): Promise<any> {
+  const searchParams = new URL(req.url).searchParams;
   const take =  parseInt(searchParams.get('take') ?? "0")  || 10;
   const order = searchParams.get('order') || 'desc';
   const cameraModel =   searchParams.get('cameraModel')
   const filmSimulation = searchParams.get('filmSimulation')
-  const userId = searchParams.get('userId')
+  const userId = searchParams.get('userId');
+  
   // Validate query parameters
   if (isNaN(take) || (order !== 'asc' && order !== 'desc')) {
     return {
