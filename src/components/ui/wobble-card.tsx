@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
+import MyImage from "../MyImage";
 
 export const WobbleCard = ({
   children,
@@ -10,12 +11,14 @@ export const WobbleCard = ({
   className,
   link,
   bgImage,
+  blurDataURL,
 }: {
   children: React.ReactNode;
   containerClassName?: string;
   className?: string;
   link?: string;
   bgImage?: string;
+  blurDataURL?: string;
 }) => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
@@ -42,13 +45,9 @@ export const WobbleCard = ({
           ? `translate3d(${mousePosition.x}px, ${mousePosition.y}px, 0) scale3d(1, 1, 1)`
           : "translate3d(0px, 0px, 0) scale3d(1, 1, 1)",
         transition: "transform 0.1s ease-out",
-        backgroundImage: bgImage ? `url(${bgImage})` : "none",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
       }}
       className={cn(
-        "mx-auto w-full bg-indigo-800  relative rounded-2xl overflow-hidden cursor-pointer",
+        "mx-auto w-full relative rounded-2xl overflow-hidden cursor-pointer",
         containerClassName
       )}
     >
@@ -73,7 +72,17 @@ export const WobbleCard = ({
           className={cn("h-full px-4 py-20 sm:px-10", className)}
         >
           <Noise />
-          {children}
+          <MyImage
+            src={bgImage ?? ""}
+            alt="noise"
+            className="absolute inset-0 left-0 top-0 w-full h-full object-cover"
+            width={400}
+            height={400}
+            blurDataURL={blurDataURL}
+            placeholder="blur"
+          />
+
+          <div className="z-[20] fixed top-10 w-fit">{children}</div>
         </motion.div>
       </div>
     </motion.section>
@@ -83,7 +92,7 @@ export const WobbleCard = ({
 const Noise = () => {
   return (
     <div
-      className="absolute inset-0 w-full h-full scale-[1.2] transform opacity-10 [mask-image:radial-gradient(#fff,transparent,75%)]"
+      className="absolute z-10 inset-0 w-full h-full scale-[1.2] transform opacity-10 [mask-image:radial-gradient(#fff,transparent,75%)]"
       style={{
         backgroundImage: "url(/noise.webp)",
         backgroundSize: "30%",

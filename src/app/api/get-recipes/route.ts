@@ -8,6 +8,7 @@ export async function GET(req: NextRequest, context: any): Promise<any> {
   const cameraModel =   searchParams.get('cameraModel')
   const filmSimulation = searchParams.get('filmSimulation')
   const userId = searchParams.get('userId');
+  const category = searchParams.get('category');
   
   // Validate query parameters
   if (isNaN(take) || (order !== 'asc' && order !== 'desc')) {
@@ -40,6 +41,12 @@ export async function GET(req: NextRequest, context: any): Promise<any> {
     queryObj.where = {
       ...queryObj.where,
       filmSimulation
+    }
+  }
+  if(category){
+    queryObj.where = {
+      ...queryObj.where,
+      category
     }
   }
   const res = await prisma.recipe.findMany(queryObj);

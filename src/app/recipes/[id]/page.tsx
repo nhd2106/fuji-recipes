@@ -66,6 +66,7 @@ const page = async ({
     ...others
   } = res;
 
+  let previousOrientation = 1;
   return (
     <MaxWidthWrapper>
       <div className="">
@@ -182,28 +183,38 @@ const page = async ({
           <span className="text-2xl font-bold">Hình tham khảo</span>
         </h2>
         <div className="">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {_.orderBy(images, "orientation", "desc").map((image: any) => {
-              return (
-                <div
-                  className={cn(
-                    "grid gap-3 md:gap-4 items-center justify-center rounded-md",
-                    image.orientation === 1
-                      ? "md:bg-gray-500 sm:p-32 sm:px-1 sm:border-white sm:border-2 sm:border-solid bg-transparent "
-                      : ""
-                  )}
-                  key={image.fileId}
-                >
-                  <MyImage
-                    src={image.url}
-                    alt={image.name}
-                    width={400}
-                    height={400}
-                    className=" relative rounded-md object-cover"
-                  />
-                </div>
-              );
-            })}
+          <div className="block items-center sm:space-x-0 sm:grid grid-cols-1 md:grid-cols-3 gap-3">
+            {images
+              .sort((a: any, b: any) => {
+                if (a.orientation === previousOrientation) {
+                  previousOrientation = b.orientation;
+                  return 1;
+                } else {
+                  previousOrientation = a.orientation;
+                  return -1;
+                }
+              })
+              .map((image: any) => {
+                return (
+                  <div
+                    className={cn(
+                      " relative my-4 sm:my-0 gap-1 p-4 h-full w-full  items-center justify-center rounded-lg shadow-2xl",
+                      image.orientation === 1
+                        ? "col-span-2   bg-transparent "
+                        : "col-span-1"
+                    )}
+                    key={image.fileId}
+                  >
+                    <MyImage
+                      src={image.url}
+                      alt={image.name}
+                      width={400}
+                      height={400}
+                      className=" relative object-contain w-full h-full"
+                    />
+                  </div>
+                );
+              })}
           </div>
         </div>
       </div>

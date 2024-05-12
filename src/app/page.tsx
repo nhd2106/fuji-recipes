@@ -1,6 +1,5 @@
 import MyImage from "@/components/MyImage";
 import { Recipe } from "@/types/recipes";
-import Image from "next/image";
 import Link from "next/link";
 import { WobbleCard } from "@/components/ui/wobble-card";
 
@@ -42,9 +41,10 @@ async function Home() {
           <h2 className="text-2xl my-4 font-bold">What will you shoot next?</h2>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 ">
             <WobbleCard
-              containerClassName="col-span-1 lg:col-span-2 h-full bg-pink-800 min-h-[500px] lg:min-h-[300px]"
+              containerClassName="col-span-1 lg:col-span-2 h-full min-h-[500px] lg:min-h-[300px]"
               bgImage="/forest.webp"
               link="/recipes?category=forest"
+              blurDataURL="LQHTK%0}}[^PNGjER%NG9[V[9[Sg"
             >
               <div className="max-w-xs">
                 <h2 className="text-left text-balance text-2xl md:text-xl lg:text-3xl font-semibold tracking-[-0.015em] text-white">
@@ -56,6 +56,7 @@ async function Home() {
               containerClassName="col-span-1 min-h-[300px]"
               bgImage="/street.webp"
               link="/recipes?category=street"
+              blurDataURL="LTGbhs%1xZs:~qt6ofj[0$WqWXWC"
             >
               <h2 className="max-w-80 text-2xl  text-left text-balance  md:text-xl lg:text-3xl font-semibold tracking-[-0.015em] text-white">
                 Street and city view
@@ -63,8 +64,9 @@ async function Home() {
             </WobbleCard>
             <WobbleCard
               link="/recipes?category=sea-side-view"
-              containerClassName="col-span-1 bg-blue-900 min-h-[500px] lg:min-h-[600px] xl:min-h-[300px]"
+              containerClassName="col-span-1 min-h-[500px] lg:min-h-[600px] xl:min-h-[300px]"
               bgImage="/sea.webp"
+              blurDataURL="LTGR|{%1xZs:~qt6ofj[0$WqWXWC"
             >
               <div className="max-w-sm">
                 <h2 className="max-w-sm md:max-w-lg  text-left text-balance text-2xl md:text-xl lg:text-3xl font-semibold tracking-[-0.015em] text-white">
@@ -76,6 +78,7 @@ async function Home() {
               link="/recipes?category=random"
               containerClassName="col-span-1 lg:col-span-2 h-full min-h-[500px] lg:min-h-[300px]"
               bgImage="/random.webp"
+              blurDataURL="LGC%Wz-:jK%g_MbHoNx]tSbbaix]"
             >
               <div className="max-w-sm">
                 <h2 className="max-w-sm md:max-w-lg  text-left text-balance text-2xl md:text-xl lg:text-3xl font-semibold tracking-[-0.015em] text-white">

@@ -23,6 +23,7 @@ function Contribute() {
   const { user } = useKindeBrowserClient();
   const [images, setImages] = useState<any[]>([]);
   const [recipe, setRecipe] = useState<any>({});
+
   const [handling, setHandling] = useState(false);
   const [uploading, setUploading] = useState(false);
   const router = useRouter();
@@ -73,6 +74,7 @@ function Contribute() {
           ...recipe,
           userId: user?.id,
           email: user?.email,
+          category: recipe.category || "random",
         })
       );
 
@@ -126,9 +128,9 @@ function Contribute() {
               options={["sea-side-view", "street", "forest", "random"]}
               type="select"
               value={recipe.category}
-              onChange={
-                (val) => setRecipe({ ...recipe, category: val }) // eslint-disable-line
-              }
+              onChange={(val) => {
+                setRecipe({ ...recipe, category: val });
+              }}
             />
           </div>
         </div>

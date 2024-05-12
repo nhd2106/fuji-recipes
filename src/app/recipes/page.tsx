@@ -1,7 +1,8 @@
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import MyImage from "@/components/MyImage";
+import { buttonVariants } from "@/components/ui/button";
 import { Recipe } from "@/types/recipes";
-import { User } from "lucide-react";
+import { PlusIcon, User } from "lucide-react";
 import Link from "next/link";
 export const dynamic = "force-dynamic";
 
@@ -74,35 +75,58 @@ async function Page({
         </div>
       ) : (
         <h1 className="text-xl md:text-2xl lg:text-3xl my-5">
-          Danh sách các recipe
+          Danh sách công thức
         </h1>
       )}
       <div>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-          {(recipes || []).map((recipe) => (
-            <Link
-              className="grid gap-4 relative"
-              href={`/recipes/${recipe.id}`}
-              key={recipe.id}
-            >
-              <MyImage
-                src={recipe.mainImage}
-                alt={recipe.name}
-                width={400}
-                height={400}
-                className="rounded-lg h-auto w-full object-cover"
-              />
-              <div className="absolute top-2 right-2 md:top-5 md:right-5 text-yellow-400 bg-black bg-opacity-50 p-1 md:p-4 rounded-md">
-                <h3 className="text-xs md:first-line:text-lg font-bold">
-                  {recipe.name}
-                </h3>
-                <p className="text-xs md:text-sm">
-                  Camera: {recipe.cameraModel}
-                </p>
-              </div>
-            </Link>
-          ))}
-        </div>
+        {(recipes || []).length ? (
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {(recipes || []).length
+              ? (recipes || []).map((recipe) => (
+                  <Link
+                    className="grid gap-4 relative"
+                    href={`/recipes/${recipe.id}`}
+                    key={recipe.id}
+                  >
+                    <MyImage
+                      src={recipe.mainImage}
+                      alt={recipe.name}
+                      width={400}
+                      height={400}
+                      className="rounded-lg h-auto w-full object-cover"
+                    />
+                    <div className="absolute top-2 right-2 md:top-5 md:right-5 text-yellow-400 bg-black bg-opacity-50 p-1 md:p-4 rounded-md">
+                      <h3 className="text-xs md:first-line:text-lg font-bold">
+                        {recipe.name}
+                      </h3>
+                      <p className="text-xs md:text-sm">
+                        Camera: {recipe.cameraModel}
+                      </p>
+                    </div>
+                  </Link>
+                ))
+              : null}
+          </div>
+        ) : (
+          <div className="w-full">
+            <h2 className="text-xl my-5">
+              Chưa có công thức nào của category này
+            </h2>
+            <div>
+              <p>
+                Bạn có thể đóng góp công thức bằng cách{" "}
+                <Link
+                  className={buttonVariants({
+                    variant: "link",
+                  })}
+                  href="/contribute"
+                >
+                  Tạo mới
+                </Link>
+              </p>
+            </div>
+          </div>
+        )}
       </div>
     </MaxWidthWrapper>
   );

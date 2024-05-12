@@ -49,6 +49,7 @@ model Recipe {
     email               String?
     likes               Float?
     favorites           Float?
+    category            String?
 }
 
 model ImageKitImage {
