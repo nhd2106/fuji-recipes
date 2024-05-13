@@ -63,6 +63,7 @@ const page = async ({
     mainImage,
     email,
     likes,
+    category,
     ...others
   } = res;
 
@@ -85,17 +86,34 @@ const page = async ({
           })}
         </div>
         <Actions recipeId={id} likes={likes} />
-        <div className="flex items-baseline ">
-          <User size={24} className="mr-2" />
-          <Link
-            href={`
+        <ul className="flex align-baseline">
+          <li>
+            <div className="flex items-baseline ">
+              <User size={24} className="mr-2" />
+              <Link
+                href={`
           /recipes?user=${userId}&email=${email}
           `}
-            className="text-sm font-bold"
-          >
-            {email}
-          </Link>
-        </div>
+                className="text-sm font-bold"
+              >
+                {email}
+              </Link>
+            </div>
+          </li>
+          <li>
+            <div className="flex items-baseline ">
+              <Tag size={24} className="ml-3 text-blue-600" />
+              <Link
+                href={`
+          /recipes?category=${category}
+          `}
+                className="text-sm font-bold"
+              >
+                {category}
+              </Link>
+            </div>
+          </li>
+        </ul>
       </div>
       <div>
         <div className="grid gap-1 md:gap-4 grid-cols-2 md:grid-cols-2 lg:grid-cols-4">
