@@ -29,6 +29,10 @@ const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const ref = useRef(null);
 
+  useOnClickOutside(ref, () => {
+    if (isOpen) setIsOpen(false);
+  });
+
   if (["/login", "/register"].includes(pathname)) {
     return <div></div>;
   }
@@ -36,12 +40,6 @@ const Header = () => {
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  useOnClickOutside(ref, () => {
-    if (isOpen) {
-      setIsOpen(false);
-    }
-  });
 
   return (
     <nav className=" relative h-14 inset-0 top-0 z-30 w-full border-b border-gray-200 bg-white/75 backdrop-blur-lg transition-all">
