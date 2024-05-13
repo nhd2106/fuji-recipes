@@ -1,3 +1,5 @@
+"use client";
+
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import { buttonVariants } from "@/components/ui/button";
 import { LoginLink, RegisterLink } from "@kinde-oss/kinde-auth-nextjs";
