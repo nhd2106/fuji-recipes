@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Providers from "@/app/providers";
-import { Analytics } from "@vercel/analytics/react";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 type Props = {
   params: { id: string };
@@ -46,7 +46,7 @@ export default function RootLayout({
           {children}
           <Footer />
         </Providers>
-        <Analytics />
+        <GoogleAnalytics gaId="G-VK80GPCRRT" />
       </body>
     </html>
   );
