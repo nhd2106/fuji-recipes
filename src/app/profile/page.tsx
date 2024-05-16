@@ -12,7 +12,7 @@ import Loading from "../loading";
 
 function Page() {
   const { user, isLoading } = useKindeBrowserClient();
-  const { data: recipes, isFetching } = useRecipes(user?.id ?? "");
+  const { data: recipes } = useRecipes(user?.id ?? "");
 
   return isLoading ? (
     <Loading />
