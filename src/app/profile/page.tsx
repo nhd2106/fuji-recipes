@@ -32,21 +32,23 @@ function Page() {
           Thông tin tài khoản
         </h1>
         {user && (
-          <div className="w-full">
-            <Avatar>
-              <AvatarImage sizes="3000" src={user?.picture ?? ""} />
-              <AvatarFallback>CN</AvatarFallback>
-            </Avatar>
-            <div className="flex flex-col space-y-5">
-              <div className="flex items-center space-x-1">
-                <User size={24} />
-                <span className="ml-2">
-                  {user.given_name} {user.family_name}
-                </span>
-              </div>
-              <div className="flex items-center space-x-1">
-                <Mail size={24} />
-                <span className="ml-2">{user.email}</span>
+          <div className="w-full ">
+            <div className="flex flex-col justify-center items-center text-center w-full">
+              <Avatar className="w-28 h-28">
+                <AvatarImage src={user?.picture ?? ""} />
+                <AvatarFallback>CN</AvatarFallback>
+              </Avatar>
+              <div className="flex flex-col space-y-5 w-full items-center">
+                <div className="flex items-center space-x-1 mt-5">
+                  <User size={24} />
+                  <span className="ml-2">
+                    {user.given_name} {user.family_name}
+                  </span>
+                </div>
+                <div className="flex items-center space-x-1">
+                  <Mail size={24} />
+                  <span className="ml-2">{user.email}</span>
+                </div>
               </div>
             </div>
             <div>

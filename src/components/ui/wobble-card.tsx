@@ -10,8 +10,8 @@ export const WobbleCard = ({
   containerClassName,
   className,
   link,
-  bgImage,
-  blurDataURL,
+  bgImage = "",
+  blurDataURL = "",
 }: {
   children: React.ReactNode;
   containerClassName?: string;
