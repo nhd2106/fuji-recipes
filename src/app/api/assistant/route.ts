@@ -1,5 +1,4 @@
 import OpenAI from 'openai';
-import type { NextApiResponse, NextApiRequest } from 'next'
 import { NextRequest, NextResponse } from 'next/server'
 
 const openai = new OpenAI({

@@ -19,6 +19,12 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Actions from "@/modules/recipe/Actions";
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
+import type { Comment } from "./type";
+import Comment from "@/components/Comment";
+import Comment from "@/components/Comment";
+
 const icons = {
   filmSimulation: <Film size={24} />,
   cameraModel: <Camera size={24} />,
@@ -66,6 +72,50 @@ const page = async ({
     category,
     ...others
   } = res;
+
+  // create dummy comments
+  const comments: Comment[] = [
+    {
+      id: "1",
+      content: "This is a great recipe",
+      createdAt: "2021-08-01",
+      updatedAt: "2021-08-01",
+      recipeId: "1",
+      userId: "1",
+      likes: 1,
+      replies: [
+        {
+          id: "1",
+          content: "Thank you",
+          createdAt: "2021-08-01",
+          updatedAt: "2021-08-01",
+          recipeId: "1",
+          userId: "1",
+          likes: 1,
+        },
+      ],
+    },
+    {
+      id: "2",
+      content: "This is a great recipe",
+      createdAt: "2021-08-01",
+      updatedAt: "2021-08-01",
+      recipeId: "1",
+      userId: "1",
+      likes: 1,
+      replies: [
+        {
+          id: "1",
+          content: "Thank you",
+          createdAt: "2021-08-01",
+          updatedAt: "2021-08-01",
+          recipeId: "1",
+          userId: "1",
+          likes: 1,
+        },
+      ],
+    },
+  ];
 
   let previousOrientation = 1;
   return (
@@ -235,6 +285,36 @@ const page = async ({
               })}
           </div>
         </div>
+      </div>
+      {/* create comment section */}
+      <div className="mt-16">
+        <h3 className="text-2xl">Bình luận </h3>
+        <div>
+          <form className="relative">
+            <Textarea
+              className="w-full h-24 mb-3"
+              placeholder="Nhập bình luận của bạn"
+            ></Textarea>
+            <div className="w-full flex justify-end">
+              <Button>Gửi</Button>
+            </div>
+          </form>
+        </div>
+      </div>
+      {/* display commments */}
+      <div>
+        {comments.map((comment) => {
+          return (
+            <div key={comment.id} className="my-4">
+              <Comment {...comment} />
+              <div>
+                {comment.replies.map((reply) => {
+                  return <Comment key={reply.id} {...reply} />;
+                })}
+              </div>
+            </div>
+          );
+        })}
       </div>
     </MaxWidthWrapper>
   );

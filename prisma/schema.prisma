@@ -83,3 +83,25 @@ model Favorite {
     createdAt DateTime @default(now())
     User      User     @relation(fields: [userId], references: [id])
 }
+
+// create reply model of comment
+model Reply {
+    id        String   @id @default(auto()) @map("_id") @db.ObjectId
+    userId    String
+    commentId String
+    content   String
+    createdAt DateTime @default(now())
+    Comment   Comment  @relation(fields: [commentId], references: [id])
+    likes     Float?
+}
+
+// create comment model of recipe and reply
+model Comment {
+    id        String   @id @default(auto()) @map("_id") @db.ObjectId
+    userId    String
+    recipeId  String
+    content   String
+    createdAt DateTime @default(now())
+    replies   Reply[]
+    likes     Float?
+}
