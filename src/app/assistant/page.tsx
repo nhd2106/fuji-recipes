@@ -37,7 +37,6 @@ function Page() {
 
   const { data: userData } = useGetUser(user?.id ?? "");
   const { mutate } = useUpdateUser();
-  const [credits, setCredits] = useState(userData?.credits ?? 0);
 
   useEffect(() => {
     if (!userData) {
@@ -237,8 +236,8 @@ function Page() {
           </div>
         )}
       </div>
-      <div className="absolute w-full left-0 bottom-0 text-sm sm:hidden">
-        <div className="w-10/12 mx-auto">
+      <div className="absolute w-full left-0 bottom-0 text-sm">
+        <div className="w-10/12 mx-auto sm:hidden">
           <span className="text-gray-500 flex ">
             <span> {userData?.credits ?? 0} lượt hỏi demo</span>
             <Wand size={24} className="mr-3 text-blue-500" />
