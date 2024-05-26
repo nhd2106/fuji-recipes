@@ -10,8 +10,8 @@ import Link from "next/link";
 export default function Login() {
   return (
     <MaxWidthWrapper>
-      <div className="h-screen grid grid-cols-2 justify-center items-center">
-        <div className="flex flex-col justify-center items-center">
+      <div className="h-screen py-32 sm:py-0 grid grid-cols-1 sm:grid-cols-2 justify-center items-center ">
+        <div className="flex flex-col justify-center items-center order-1 sm:order-2">
           <h1 className="text-4xl my-10">Vui lòng đăng nhập</h1>
           <div className="flex items-center space-x-4">
             <div className="flex">

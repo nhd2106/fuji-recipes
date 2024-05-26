@@ -8,15 +8,17 @@ datasource db {
 }
 
 model User {
-    id        String   @id @default(auto()) @map("_id") @db.ObjectId
-    email     String   @unique
-    name      String?
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
-    kindeId   String
-
+    id               String     @id @default(auto()) @map("_id") @db.ObjectId
+    email            String     @unique
+    createdAt        DateTime   @default(now())
+    updatedAt        DateTime   @updatedAt
+    kindeId          String     @unique
+    family_name      String
+    given_name       String
     likedRecipes     Like[]
     favoritedRecipes Favorite[]
+    picture          String?
+    credits          Float?     @default(5)
 }
 
 model Recipe {
@@ -82,4 +84,26 @@ model Favorite {
     recipeId  String
     createdAt DateTime @default(now())
     User      User     @relation(fields: [userId], references: [id])
+}
+
+// create reply model of comment
+model Reply {
+    id        String   @id @default(auto()) @map("_id") @db.ObjectId
+    userId    String
+    commentId String
+    content   String
+    createdAt DateTime @default(now())
+    Comment   Comment  @relation(fields: [commentId], references: [id])
+    likes     Float?
+}
+
+// create comment model of recipe and reply
+model Comment {
+    id        String   @id @default(auto()) @map("_id") @db.ObjectId
+    userId    String
+    recipeId  String
+    content   String
+    createdAt DateTime @default(now())
+    replies   Reply[]
+    likes     Float?
 }
