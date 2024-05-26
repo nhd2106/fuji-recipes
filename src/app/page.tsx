@@ -32,13 +32,15 @@ async function Home() {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between max-w-7xl mx-auto w-full my-5 md:p-24 p-5">
-      <h1 className="max-w-4xl text-3xl font-bold md:text-4xl lg:text-5xl mb-20">
+      <h1 className="max-w-4xl text-2xl sm:text-3xl font-bold md:text-4xl lg:text-5xl mb-8 sm:mb-20">
         Create your <span className="text-blue-600">recipes </span>
         and share it with the world.
       </h1>
       <div>
         <section className="max-w-7xl mx-auto w-full my-5">
-          <h2 className="text-2xl my-4 font-bold">What will you shoot next?</h2>
+          <h2 className="text-xl sm:text-2xl my-4 font-bold">
+            What will you shoot next?
+          </h2>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 ">
             <WobbleCard
               containerClassName="col-span-1 lg:col-span-2 h-full min-h-[500px] lg:min-h-[300px]"

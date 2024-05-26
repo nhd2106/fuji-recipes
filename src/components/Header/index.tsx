@@ -17,17 +17,33 @@ import {
   PlusSquare,
   LogOut,
   XIcon,
+  BotIcon,
 } from "lucide-react";
 import { usePathname } from "next/navigation";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useOnClickOutside } from "usehooks-ts";
 import clsx from "clsx";
+import { useCreateUser, useGetUser, useUpdateUser } from "@/querries/user";
+import type { User as UserType } from "@/querries/user";
+import { cn } from "@/lib/utils";
 
 const Header = () => {
   const pathname = usePathname();
   const { user } = useKindeBrowserClient() || {};
   const [isOpen, setIsOpen] = useState(false);
   const ref = useRef(null);
+
+  const { data, isSuccess } = useGetUser(user?.id ?? "");
+  const { mutate } = useCreateUser();
+
+  useEffect(() => {
+    if (isSuccess) {
+      const { properties, ...userInfo } = user ?? ({} as any);
+      if (!data && user) {
+        mutate(userInfo as UserType);
+      }
+    }
+  }, [isSuccess, user, data, mutate]);
 
   useOnClickOutside(ref, () => {
     if (isOpen) setIsOpen(false);
@@ -74,14 +90,28 @@ const Header = () => {
               </Link>
 
               {user && (
-                <Link
-                  className={buttonVariants({
-                    size: "sm",
-                  })}
-                  href="/contribute"
-                >
-                  Tạo Recipe <Plus className="ml-1.5  h-5 w-5" />
-                </Link>
+                <div>
+                  <Link
+                    className={cn(
+                      buttonVariants({
+                        size: "sm",
+                        variant: "outline",
+                      }),
+                      "mx-2"
+                    )}
+                    href="/assistant"
+                  >
+                    Assistant <BotIcon className="ml-1.5  h-5 w-5" />
+                  </Link>
+                  <Link
+                    className={buttonVariants({
+                      size: "sm",
+                    })}
+                    href="/contribute"
+                  >
+                    Tạo Recipe <Plus className="ml-1.5  h-5 w-5" />
+                  </Link>
+                </div>
               )}
               {user ? (
                 <div className="hidden items-center space-x-4 sm:flex">
@@ -142,6 +172,12 @@ const Header = () => {
                   <div className="flex items-center text-lg">
                     <PlusSquare className="mr-2" /> {/* Plus icon */}
                     Tạo Recipe
+                  </div>
+                </Link>
+                <Link href="/assistant" onClick={toggleMenu}>
+                  <div className="flex items-center text-lg">
+                    <BotIcon className="mr-2" /> {/* Bot icon */}
+                    Assistant
                   </div>
                 </Link>
                 <Link onClick={toggleMenu} href="/profile">

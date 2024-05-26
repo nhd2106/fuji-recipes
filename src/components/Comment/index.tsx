@@ -1,8 +1,7 @@
 "use client";
 
 import React from "react";
-import PropTypes from "prop-types";
-import { PlusIcon, User } from "lucide-react";
+import { Heart, User } from "lucide-react";
 
 const Comment = ({
   content,
@@ -15,7 +14,7 @@ const Comment = ({
   content: string;
   userId: string;
   likes: number;
-  replies: {
+  replies?: {
     id: string;
     content: string;
     createdAt: string;
@@ -38,13 +37,13 @@ const Comment = ({
           </div>
           <div className="flex items-center space-x-2">
             <span>{likes}</span>
-            <PlusIcon size={16} />
+            <Heart size={16} />
           </div>
         </div>
       </div>
       <div>{content}</div>
       <div className="flex flex-col space-y-2">
-        {replies.map((reply) => (
+        {(replies ?? []).map((reply) => (
           <div key={reply.id} className="pl-4 border-l-2 border-gray-200">
             <div className="flex items-center space-x-2">
               <User size={24} />
@@ -55,7 +54,7 @@ const Comment = ({
                 </div>
                 <div className="flex items-center space-x-2">
                   <span>{reply.likes}</span>
-                  <PlusIcon size={16} />
+                  <Heart size={16} />
                 </div>
               </div>
             </div>

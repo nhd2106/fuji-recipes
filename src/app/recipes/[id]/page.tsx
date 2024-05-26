@@ -21,8 +21,7 @@ import { cn } from "@/lib/utils";
 import Actions from "@/modules/recipe/Actions";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import type { Comment } from "./type";
-import Comment from "@/components/Comment";
+import type { Comment as CommentType } from "./type";
 import Comment from "@/components/Comment";
 
 const icons = {
@@ -74,7 +73,7 @@ const page = async ({
   } = res;
 
   // create dummy comments
-  const comments: Comment[] = [
+  const comments: CommentType[] = [
     {
       id: "1",
       content: "This is a great recipe",
@@ -308,7 +307,7 @@ const page = async ({
             <div key={comment.id} className="my-4">
               <Comment {...comment} />
               <div>
-                {comment.replies.map((reply) => {
+                {(comment?.replies ?? []).map((reply) => {
                   return <Comment key={reply.id} {...reply} />;
                 })}
               </div>

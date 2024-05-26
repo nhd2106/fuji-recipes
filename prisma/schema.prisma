@@ -8,15 +8,17 @@ datasource db {
 }
 
 model User {
-    id        String   @id @default(auto()) @map("_id") @db.ObjectId
-    email     String   @unique
-    name      String?
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
-    kindeId   String
-
+    id               String     @id @default(auto()) @map("_id") @db.ObjectId
+    email            String     @unique
+    createdAt        DateTime   @default(now())
+    updatedAt        DateTime   @updatedAt
+    kindeId          String     @unique
+    family_name      String
+    given_name       String
     likedRecipes     Like[]
     favoritedRecipes Favorite[]
+    picture          String?
+    credits          Float?     @default(5)
 }
 
 model Recipe {
