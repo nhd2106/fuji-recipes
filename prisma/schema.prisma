@@ -18,7 +18,7 @@ model User {
     likedRecipes     Like[]
     favoritedRecipes Favorite[]
     picture          String?
-    credits          Float?     @default(5)
+    credits          Float?     @default(20)
 }
 
 model Recipe {

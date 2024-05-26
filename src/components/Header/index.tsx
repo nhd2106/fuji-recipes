@@ -158,7 +158,7 @@ const Header = () => {
         {/* Sidebar content goes here */}
         <div className="p-4 grid grid-rows-1 grid-cols-1 justify-start bg-white">
           <h1 className="text-2xl mb-10">
-            <Link href="/">
+            <Link href="/" onClick={toggleMenu}>
               <div className="flex items-center">
                 <Home className="mr-2" /> {/* Home icon */}
                 Fuji-X-Recipes
