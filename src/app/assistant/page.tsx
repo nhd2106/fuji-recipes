@@ -179,12 +179,7 @@ function Page() {
   };
 
   return (
-    <div
-      className="relative min-h[calc(100vh - 179px)] max-w-7xl mx-auto"
-      style={{
-        minHeight: "calc(100vh - 80px)",
-      }}
-    >
+    <div className="relative  max-w-7xl mx-auto min-h-[calc(100vh-80px)]">
       <h1 className="text-xl sm:text-2xl text-center mt-2 relative ">
         <span className="flex items-center space-x-2 justify-center">
           <span className="sm:flex absolute left-2 text-base hidden ">
@@ -197,10 +192,7 @@ function Page() {
       </h1>
       <div
         ref={chatRef}
-        style={{
-          height: "calc(100vh - 230px)",
-        }}
-        className="overflow-y-auto mt-2 sm:mt-4 p-3 sm:p-8 rounded-lg no-scrollbar "
+        className="overflow-y-auto mt-2 sm:mt-4 p-3 sm:p-8 rounded-lg no-scrollbar h-[calc(100vh-230px)]"
       >
         {chatLogs.map((log, index) =>
           log.role === "user" ? (
