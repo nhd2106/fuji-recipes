@@ -45,7 +45,7 @@ const navigation = {
 
 const Footer = () => {
   const pathname = usePathname();
-  if (["/login", "/register", "/assistant"].includes(pathname)) {
+  if (["/login", "/register", "/assistant", "/campaign"].includes(pathname)) {
     return <div></div>;
   }
   return (

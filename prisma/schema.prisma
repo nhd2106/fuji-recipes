@@ -107,3 +107,14 @@ model Comment {
     replies   Reply[]
     likes     Float?
 }
+
+
+// create model of campaign that has name, description, image, and link
+model Campaign {
+    id        String   @id @default(auto()) @map("_id") @db.ObjectId
+    name      String
+    description String
+    image     String
+    link      String
+    createdAt DateTime @default(now())
+}

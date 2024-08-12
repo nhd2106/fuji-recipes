@@ -14,6 +14,18 @@ const nextConfig = {
         port: "",
         pathname: "/a/*",
       },
+      {
+        protocol: "https",
+        hostname: "source.unsplash.com",
+        port: "",
+        pathname: "/random/*",
+      },
+      {
+        protocol: "https",
+        hostname: "cdn.pixabay.com",
+        port: "",
+        pathname: "/photo/**",
+      },
     ],
   },
   redirects: async () => {

@@ -301,7 +301,7 @@ const page = async ({
         </div>
       </div>
       {/* display commments */}
-      {/* <div>
+      <div>
         {comments.map((comment) => {
           return (
             <div key={comment.id} className="my-4">
@@ -314,7 +314,7 @@ const page = async ({
             </div>
           );
         })}
-      </div> */}
+      </div>
     </MaxWidthWrapper>
   );
 };
