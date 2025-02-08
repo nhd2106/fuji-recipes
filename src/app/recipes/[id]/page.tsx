@@ -72,49 +72,49 @@ const page = async ({
     ...others
   } = res;
 
-  // create dummy comments
-  const comments: CommentType[] = [
-    {
-      id: "1",
-      content: "This is a great recipe",
-      createdAt: "2021-08-01",
-      updatedAt: "2021-08-01",
-      recipeId: "1",
-      userId: "1",
-      likes: 1,
-      replies: [
-        {
-          id: "1",
-          content: "Thank you",
-          createdAt: "2021-08-01",
-          updatedAt: "2021-08-01",
-          recipeId: "1",
-          userId: "1",
-          likes: 1,
-        },
-      ],
-    },
-    {
-      id: "2",
-      content: "This is a great recipe",
-      createdAt: "2021-08-01",
-      updatedAt: "2021-08-01",
-      recipeId: "1",
-      userId: "1",
-      likes: 1,
-      replies: [
-        {
-          id: "1",
-          content: "Thank you",
-          createdAt: "2021-08-01",
-          updatedAt: "2021-08-01",
-          recipeId: "1",
-          userId: "1",
-          likes: 1,
-        },
-      ],
-    },
-  ];
+  // // create dummy comments
+  // const comments: CommentType[] = [
+  //   {
+  //     id: "1",
+  //     content: "This is a great recipe",
+  //     createdAt: "2021-08-01",
+  //     updatedAt: "2021-08-01",
+  //     recipeId: "1",
+  //     userId: "1",
+  //     likes: 1,
+  //     replies: [
+  //       {
+  //         id: "1",
+  //         content: "Thank you",
+  //         createdAt: "2021-08-01",
+  //         updatedAt: "2021-08-01",
+  //         recipeId: "1",
+  //         userId: "1",
+  //         likes: 1,
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     id: "2",
+  //     content: "This is a great recipe",
+  //     createdAt: "2021-08-01",
+  //     updatedAt: "2021-08-01",
+  //     recipeId: "1",
+  //     userId: "1",
+  //     likes: 1,
+  //     replies: [
+  //       {
+  //         id: "1",
+  //         content: "Thank you",
+  //         createdAt: "2021-08-01",
+  //         updatedAt: "2021-08-01",
+  //         recipeId: "1",
+  //         userId: "1",
+  //         likes: 1,
+  //       },
+  //     ],
+  //   },
+  // ];
 
   let previousOrientation = 1;
   return (
@@ -302,7 +302,7 @@ const page = async ({
       </div>
       {/* display commments */}
       <div>
-        {comments.map((comment) => {
+        {/* {comments.map((comment) => {
           return (
             <div key={comment.id} className="my-4">
               <Comment {...comment} />
@@ -313,7 +313,7 @@ const page = async ({
               </div>
             </div>
           );
-        })}
+        })} */}
       </div>
     </MaxWidthWrapper>
   );
